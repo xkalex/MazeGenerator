@@ -7,8 +7,6 @@ using System.Linq;
 
 public enum cellType { Cell, Wall, Road }
 
-public struct Point { public int X, Y; }
-
 public class Cell
 {
     int x, y;
