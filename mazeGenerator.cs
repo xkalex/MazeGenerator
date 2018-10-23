@@ -146,7 +146,9 @@ void Start()
         {
             if (cell.Type == cellType.Wall)
             {
-                Instantiate(cellPrefab, new Vector3(cell.X, 0, cell.Y), Quaternion.identity);
+                Instantiate(cellPrefab, new Vector3(cell.X, 0, cell.Y), Quaternion.identity); 
+                // Работает только с префабами 1х1, при желании можно учитывать размер клетки, просто у меня сейчас нет возможности это тестировать.
+                // Я бы заменил foreach на for и каждую итерацию учитывал бы ширину/длину префаба.
             }
         }
     }
