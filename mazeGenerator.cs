@@ -127,7 +127,6 @@ void Start()
 
         do
         {
-
             curCell = maze.History.Last();
             nextCell = maze.getRandomEmptyNeighbour(curCell);
             if(nextCell != null)
@@ -139,16 +138,20 @@ void Start()
             {
                 maze.History.RemoveAt(maze.History.Count - 1);
             }
-
         } while (maze.History.Count > 0);
 
-        foreach (Cell cell in maze.CellMatrix)
+
+
+        //Строим лабиринт из префабов
+        for(int x = 0; x < maze.CellMatrix.GetLength(0); x++)
         {
-            if (cell.Type == cellType.Wall)
+            for (int y = 0; y < maze.CellMatrix.GetLength(1); y++)
             {
-                Instantiate(cellPrefab, new Vector3(cell.X, 0, cell.Y), Quaternion.identity); 
-                // Работает только с префабами 1х1, при желании можно учитывать размер клетки, просто у меня сейчас нет возможности это тестировать.
-                // Я бы заменил foreach на for и каждую итерацию учитывал бы ширину/длину префаба.
+                Cell cell = maze.CellMatrix[x,y];
+                if (cell.Type == cellType.Wall)
+                {
+                    Instantiate(cellPrefab, new Vector3(cell.X * cellPrefab.transform.localScale.x, 0, cell.Y * cellPrefab.transform.localScale.z), Quaternion.identity);
+                }
             }
         }
     }
